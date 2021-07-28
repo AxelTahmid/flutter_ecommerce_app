@@ -26,7 +26,7 @@ class APIService {
       }
     } on DioError catch (e) {
       // ! add to response for null safety
-      if (e.response!.statusCode == 404) {
+      if (e.response.statusCode == 404) {
         ret = false;
       } else {
         ret = false;

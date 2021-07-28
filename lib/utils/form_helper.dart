@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'package:flutter/material.dart';
 
 class FormHelper {
@@ -128,7 +127,7 @@ class FormHelper {
           title: new Text(title),
           content: new Text(message),
           actions: [
-            new TextButton(
+            new FlatButton(
               onPressed: () {
                 return onPressed();
               },
