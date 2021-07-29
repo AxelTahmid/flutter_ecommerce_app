@@ -127,7 +127,7 @@ class FormHelper {
           title: new Text(title),
           content: new Text(message),
           actions: [
-            new FlatButton(
+            new TextButton(
               onPressed: () {
                 return onPressed();
               },

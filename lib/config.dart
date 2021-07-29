@@ -3,4 +3,8 @@ class Config {
   static String secret = "cs_6f6f47948c59f64665469345a2103235e14a300c";
   static String url = "https://wedeliver-bd.com//wp-json/wc/v3/";
   static String customerURL = "customers";
+  static String tokenURL =
+      "https://wedeliver-bd.com//wp-json/jwt-auth/v1/token";
+  //token key in auth wp-config
+  // define('JWT_AUTH_SECRET_KEY',         'jU&f@]6-RN>[9EM:bL^19@@==-,q1G5UW[xF-JDR0^%bRw1rvW~Gq-+T+eAMJG0@');
 }
