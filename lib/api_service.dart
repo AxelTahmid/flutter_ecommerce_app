@@ -3,8 +3,10 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:we_deliver_bd/config.dart';
+import 'package:we_deliver_bd/models/category.dart';
 import 'package:we_deliver_bd/models/customer.dart';
 import 'package:we_deliver_bd/models/login_model.dart';
+import 'package:we_deliver_bd/models/product.dart';
 
 class APIService {
   Future<bool> createCustomer(CustomerModel model) async {
@@ -65,4 +67,67 @@ class APIService {
 
     return model;
   }
-}
+
+  Future<List<Category>> getCategories() async {
+    // List<Category> data = new List<Category>();  //depreaceated
+    List<Category> data = [];
+
+    try {
+      String url = Config.url +
+          Config.categoriesURL +
+          "?consumer_key=${Config.key}&consumer_secret=${Config.secret}";
+
+      var response = await Dio().get(
+        url,
+        options: new Options(
+          headers: {
+            HttpHeaders.contentTypeHeader: "application/json",
+          },
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        data = (response.data as List)
+            .map(
+              (i) => Category.fromJson(i),
+            )
+            .toList();
+      }
+    } on DioError catch (e) {
+      print(e.message);
+    }
+
+    return data;
+  }
+
+  Future<List<Product>> getProducts(String tagID) async {
+    List<Product> data = [];
+
+    try {
+      String url = Config.url +
+          Config.productsURL +
+          "?consumer_key=${Config.key}&consumer_secret=${Config.secret}&tag=$tagID";
+
+      var response = await Dio().get(
+        url,
+        options: new Options(
+          headers: {
+            HttpHeaders.contentTypeHeader: "application/json",
+          },
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        data = (response.data as List)
+            .map(
+              (i) => Product.fromJson(i),
+            )
+            .toList();
+      }
+    } on DioError catch (e) {
+      print(e.message);
+    }
+
+    return data;
+  }
+} //ends here. methods above

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:we_deliver_bd/pages/login_page.dart';
+import 'package:we_deliver_bd/pages/home_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
               color: Colors.blueAccent,
             )),
       ),
-      home: LoginPage(),
+      home: HomePage(),
     );
   }
 }

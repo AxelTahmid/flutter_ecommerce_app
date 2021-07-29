@@ -1,5 +1,5 @@
 class CustomerModel {
-  // added ? mark to get rid of null safety
+  // add ? mark to get rid of null safety
   String email;
   String firstName;
   String lastName;

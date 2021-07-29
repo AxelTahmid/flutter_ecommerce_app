@@ -5,6 +5,12 @@ class Config {
   static String customerURL = "customers";
   static String tokenURL =
       "https://wedeliver-bd.com//wp-json/jwt-auth/v1/token";
-  //token key in auth wp-config
-  // define('JWT_AUTH_SECRET_KEY',         'jU&f@]6-RN>[9EM:bL^19@@==-,q1G5UW[xF-JDR0^%bRw1rvW~Gq-+T+eAMJG0@');
+  static String categoriesURL = "products/categories";
+  static String productsURL = "products";
+  // tag ids need working on backend
+  static String todayOffersTagId = '';
+  static String topSellingProductsTagId = '';
 }
+
+//token key in auth wp-config
+// define('JWT_AUTH_SECRET_KEY', 'jU&f@]6-RN>[9EM:bL^19@@==-,q1G5UW[xF-JDR0^%bRw1rvW~Gq-+T+eAMJG0@');
