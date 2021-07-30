@@ -26,6 +26,26 @@ class ProductCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
+                Visibility(
+                  visible: data.calculateDiscount() > 0,
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Text(
+                        '${data.calculateDiscount()}% OFF',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
                 Flexible(
                   child: Stack(
                     alignment: Alignment.center,
@@ -69,15 +89,12 @@ class ProductCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Visibility(
-                      visible: data.salePrice != null,
-                      child: Text(
-                        ' ${data.salePrice}৳',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
+                    Text(
+                      ' ${data.salePrice}৳',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],

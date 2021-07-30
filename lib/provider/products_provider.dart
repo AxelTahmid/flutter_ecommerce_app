@@ -37,12 +37,12 @@ class ProductProvider with ChangeNotifier {
 
   setLoadingState(LoadMoreStatus loadMoreStatus) {
     _loadMoreStatus = loadMoreStatus;
-    //notifyListeners();
+    notifyListeners();
   }
 
   setSortOrder(SortBy sortBy) {
     _sortBy = sortBy;
-    //notifyListeners();
+    notifyListeners();
   }
 
   fetchProducts(pageNumber,
@@ -66,6 +66,6 @@ class ProductProvider with ChangeNotifier {
     }
 
     setLoadingState(LoadMoreStatus.STABLE);
-    //notifyListeners();
+    notifyListeners();
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:we_deliver_bd/models/product.dart';
@@ -14,6 +16,10 @@ class ProductPage extends BasePage {
 
 class _ProductPageState extends BasePageState<ProductPage> {
   int _page = 1;
+  ScrollController _scrollController = ScrollController();
+
+  final _searchQuery = TextEditingController();
+  Timer _debounce;
 
   final _sortByOptions = [
     SortBy("popularity", "Popularity", "asc"),
@@ -29,7 +35,28 @@ class _ProductPageState extends BasePageState<ProductPage> {
     productList.setLoadingState(LoadMoreStatus.INITIAL);
     productList.fetchProducts(_page);
 
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        productList.setLoadingState(LoadMoreStatus.LOADING);
+        productList.fetchProducts(++_page);
+      }
+    });
+    //filter with category id here. has issues with debugger
+
+    _searchQuery.addListener(_onSearchChange);
     super.initState();
+  }
+
+  _onSearchChange() {
+    var productList = Provider.of<ProductProvider>(context, listen: false);
+
+    if (_debounce?.isActive ?? false) _debounce.cancel();
+    _debounce = Timer(const Duration(milliseconds: 2000), () {
+      productList.resetStreams();
+      productList.setLoadingState(LoadMoreStatus.INITIAL);
+      productList.fetchProducts(_page, strSerarch: _searchQuery.text);
+    });
   }
 
   @override
@@ -43,7 +70,8 @@ class _ProductPageState extends BasePageState<ProductPage> {
         if (productsModel.allProducts != null &&
             productsModel.allProducts.length > 0 &&
             productsModel.getLoadMoreStatus() != LoadMoreStatus.INITIAL) {
-          return _buildList(productsModel.allProducts);
+          return _buildList(productsModel.allProducts,
+              productsModel.getLoadMoreStatus() == LoadMoreStatus.LOADING);
         }
 
         return Center(
@@ -53,13 +81,14 @@ class _ProductPageState extends BasePageState<ProductPage> {
     );
   }
 
-  Widget _buildList(List<Product> items) {
+  Widget _buildList(List<Product> items, bool isLoadMore) {
     return Column(
       children: [
         _productFilters(),
         Flexible(
           child: GridView.count(
             shrinkWrap: true,
+            controller: _scrollController,
             crossAxisCount: 2,
             physics: ClampingScrollPhysics(),
             scrollDirection: Axis.vertical,
@@ -70,6 +99,15 @@ class _ProductPageState extends BasePageState<ProductPage> {
             }).toList(),
           ),
         ),
+        Visibility(
+          child: Container(
+            padding: EdgeInsets.all(5),
+            height: 35.0,
+            width: 35.0,
+            child: CircularProgressIndicator(),
+          ),
+          visible: isLoadMore,
+        )
       ],
     );
   }
@@ -82,6 +120,7 @@ class _ProductPageState extends BasePageState<ProductPage> {
         children: [
           Flexible(
             child: TextField(
+              controller: _searchQuery,
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.search),
                 hintText: "Search",
@@ -102,7 +141,13 @@ class _ProductPageState extends BasePageState<ProductPage> {
               borderRadius: BorderRadius.circular(9.0),
             ),
             child: PopupMenuButton(
-              onSelected: (sortBy) {}, // write code later
+              onSelected: (sortBy) {
+                var productList =
+                    Provider.of<ProductProvider>(context, listen: false);
+                productList.resetStreams();
+                productList.setSortOrder(sortBy);
+                productList.fetchProducts(_page);
+              }, // write code later
               itemBuilder: (BuildContext context) {
                 return _sortByOptions.map((item) {
                   return PopupMenuItem(
