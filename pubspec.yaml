@@ -23,6 +23,7 @@ environment:
 dependencies:
   dio: 3.0.10
   carousel_pro: ^1.0.0
+  provider: 4.3.2
   flutter:
     sdk: flutter
 

@@ -8,8 +8,8 @@ class Config {
   static String categoriesURL = "products/categories";
   static String productsURL = "products";
   // tag ids need working on backend
-  static String todayOffersTagId = '';
-  static String topSellingProductsTagId = '';
+  static String offersTagID = '264';
+  static String trendingTagID = '265';
 }
 
 //token key in auth wp-config

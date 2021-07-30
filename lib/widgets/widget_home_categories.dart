@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:we_deliver_bd/api_service.dart';
 import 'package:we_deliver_bd/models/category.dart' as categoryModel;
+import 'package:we_deliver_bd/pages/product_page.dart';
 
 class WidgetCategories extends StatefulWidget {
   // WidgetCategories({Key? key}) : super(key: key);
@@ -78,47 +79,63 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
         itemCount: categories.length,
         itemBuilder: (context, index) {
           var data = categories[index];
-          return Column(
-            children: [
-              Container(
-                margin: EdgeInsets.all(10),
-                width: 80,
-                height: 80,
-                alignment: Alignment.center,
-                // child: Image.network(
-                //   data.image.url,
-                //   height: 80,
-                // ),
-                child: data.image != null
-                    ? ClipRRect(
-                        borderRadius: BorderRadius.circular(50),
-                        child: Image.network(
-                          data.image.url,
-                          fit: BoxFit.cover,
-                        ),
-                      )
-                    : SizedBox.shrink(),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.black12,
-                        offset: Offset(0, 5),
-                        blurRadius: 15),
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProductPage(
+                    categoryId: data.categoryId,
+                  ),
+                ),
+              );
+            },
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.all(10),
+                  width: 80,
+                  height: 80,
+                  alignment: Alignment.center,
+                  // child: Image.network(
+                  //   data.image.url,
+                  //   height: 80,
+                  // ),
+                  child: data.image != null
+                      ? ClipRRect(
+                          borderRadius: BorderRadius.circular(50),
+                          child: Image.network(
+                            data.image.url,
+                            fit: BoxFit.cover,
+                          ),
+                        )
+                      : Image.network(
+                          "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1200px-No_image_available.svg.png",
+                        ), //SizedBox.shrink(),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.black12,
+                          offset: Offset(0, 5),
+                          blurRadius: 15),
+                    ],
+                  ),
+                ),
+                Row(
+                  children: [
+                    Text(data.categoryName.toString()),
+                    Icon(
+                      Icons.keyboard_arrow_right,
+                      size: 14,
+                    ),
                   ],
                 ),
-              ),
-              Row(
-                children: [
-                  Text(data.categoryName.toString()),
-                  Icon(
-                    Icons.keyboard_arrow_right,
-                    size: 14,
-                  ),
-                ],
-              ),
-            ],
+              ],
+            ),
           );
         },
       ),

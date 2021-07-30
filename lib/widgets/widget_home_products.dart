@@ -60,7 +60,7 @@ class _WidgetHomeProductsState extends State<WidgetHomeProducts> {
 
   Widget _productsList() {
     return new FutureBuilder(
-      future: apiService.getProducts(this.widget.tagId),
+      future: apiService.getProducts(tagName: this.widget.tagId),
       builder: (BuildContext context, AsyncSnapshot<List<Product>> model) {
         if (model.hasData) {
           return _buildProductsList(model.data);
@@ -85,6 +85,8 @@ class _WidgetHomeProductsState extends State<WidgetHomeProducts> {
         itemBuilder: (context, index) {
           var data = items[index];
           return Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Container(
                 margin: EdgeInsets.all(10),
@@ -92,20 +94,23 @@ class _WidgetHomeProductsState extends State<WidgetHomeProducts> {
                 height: 120,
                 alignment: Alignment.center,
                 // child: Image.network(
-                //   data.image.url,
-                //   height: 80,
+                //   data.images[0].src,
+                //   height: 120,
                 // ),
                 child: data.images != null
                     ? ClipRRect(
-                        borderRadius: BorderRadius.circular(4),
+                        borderRadius: BorderRadius.circular(12),
                         child: Image.network(
                           data.images[0].src,
                           fit: BoxFit.cover,
                         ),
                       )
-                    : SizedBox.shrink(),
+                    : Image.network(
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1200px-No_image_available.svg.png",
+                      ), //SizedBox.shrink(),
                 decoration: BoxDecoration(
                   shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(12),
                   color: Colors.white,
                   boxShadow: [
                     BoxShadow(
@@ -142,7 +147,7 @@ class _WidgetHomeProductsState extends State<WidgetHomeProducts> {
                       ),
                     ),
                     Text(
-                      '${data.salePrice}৳',
+                      ' ${data.salePrice}৳',
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.black,

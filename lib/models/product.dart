@@ -35,7 +35,6 @@ class Product {
     stockStatus = json['stock_status'];
 
     if (json['categories'] != null) {
-      // categories = new List<Categories>();
       List<Categories> categories = [];
       json['categories'].forEach((v) {
         categories.add(new Categories.fromJson(v));
@@ -43,7 +42,6 @@ class Product {
     }
 
     if (json['images'] != null) {
-      // categories = new List<Categories>();
       List<Images> images = [];
       json['images'].forEach((v) {
         images.add(new Images.fromJson(v));

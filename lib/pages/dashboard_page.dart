@@ -26,7 +26,7 @@ class _DashboardPageState extends State<DashboardPage> {
               tagId: Config.offersTagID,
             ),
             WidgetHomeProducts(
-              labelName: "Trending Products!",
+              labelName: "Top Selling Products!",
               tagId: Config.trendingTagID,
             )
           ],

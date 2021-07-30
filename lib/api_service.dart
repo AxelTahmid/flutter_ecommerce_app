@@ -100,13 +100,52 @@ class APIService {
     return data;
   }
 
-  Future<List<Product>> getProducts(String tagID) async {
+  Future<List<Product>> getProducts({
+    int pageNumber,
+    int pageSize,
+    String strSearch,
+    String tagName,
+    String categoryId,
+    String sortBy,
+    String sortOrder = "asc",
+  } //curly for optional parameter
+      ) async {
     List<Product> data = [];
 
     try {
+      String parameter = "";
+
+      if (strSearch != null) {
+        parameter += "&search=$strSearch";
+      }
+
+      if (pageSize != null) {
+        parameter += "&per_page=$pageSize";
+      }
+
+      if (pageNumber != null) {
+        parameter += "&page=$pageNumber";
+      }
+
+      if (tagName != null) {
+        parameter += "&tag=$tagName";
+      }
+
+      if (categoryId != null) {
+        parameter += "&category=$categoryId";
+      }
+
+      if (sortBy != null) {
+        parameter += "&orderby=$sortBy";
+      }
+
+      if (sortOrder != null) {
+        parameter += "&order=$sortOrder";
+      }
+
       String url = Config.url +
           Config.productsURL +
-          "?consumer_key=${Config.key}&consumer_secret=${Config.secret}&tag=$tagID";
+          "?consumer_key=${Config.key}&consumer_secret=${Config.secret}${parameter.toString()}";
 
       var response = await Dio().get(
         url,
