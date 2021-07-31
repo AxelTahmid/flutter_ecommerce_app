@@ -108,6 +108,7 @@ class APIService {
     String categoryId,
     String sortBy,
     String sortOrder = "asc",
+    List<int> productsIDs,
   } //curly for optional parameter
       ) async {
     List<Product> data = [];
@@ -141,6 +142,10 @@ class APIService {
 
       if (sortOrder != null) {
         parameter += "&order=$sortOrder";
+      }
+
+      if (productsIDs != null) {
+        parameter += "&include=${productsIDs.join(",").toString()}";
       }
 
       String url = Config.url +

@@ -44,7 +44,22 @@ class _ExpandTextState extends State<ExpandText> {
                 fontSize: FontSize.medium,
               )
             },
-          )
+          ),
+          Align(
+            child: GestureDetector(
+              child: Text(
+                descTextShowFlag ? "Show Less" : "Show More",
+                style: TextStyle(
+                  color: Colors.blue,
+                ),
+              ),
+              onTap: () {
+                setState(() {
+                  descTextShowFlag = !descTextShowFlag;
+                });
+              },
+            ),
+          ),
         ],
       ),
     );

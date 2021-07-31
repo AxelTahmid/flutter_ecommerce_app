@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:we_deliver_bd/models/product.dart';
 import 'package:we_deliver_bd/utils/custom_stepper.dart';
 import 'package:we_deliver_bd/utils/expand_text.dart';
+import 'package:we_deliver_bd/widgets/widget_related_products.dart';
 
 class ProductDetailsWidget extends StatelessWidget {
   ProductDetailsWidget({Key key, this.data}) : super(key: key);
@@ -103,9 +104,17 @@ class ProductDetailsWidget extends StatelessWidget {
                 ),
                 SizedBox(height: 5),
                 ExpandText(
-                    labelHeader: "Product Details",
-                    desc: data.description,
-                    shortDesc: data.shortDescription)
+                  labelHeader: "Product Details",
+                  desc: data.description,
+                  shortDesc: data.shortDescription,
+                ),
+                Divider(),
+                SizedBox(height: 10),
+                WidgetRelatedProducts(
+                  //filter for related isnt working
+                  labelName: "Related Items",
+                  products: this.data.relatedIds,
+                )
               ],
             ),
           ],
