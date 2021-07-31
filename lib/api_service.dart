@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:we_deliver_bd/config.dart';
+import 'package:we_deliver_bd/models/cart_request_model.dart';
+import 'package:we_deliver_bd/models/cart_response_model.dart';
 import 'package:we_deliver_bd/models/category.dart';
 import 'package:we_deliver_bd/models/customer.dart';
 import 'package:we_deliver_bd/models/login_model.dart';
@@ -173,5 +175,63 @@ class APIService {
     }
 
     return data;
+  }
+
+  Future<CartResponseModel> addtoCart(CartRequestModel model) async {
+    model.userId = int.parse(Config.userId);
+
+    CartResponseModel responseModel;
+
+    try {
+      var response = await Dio().post(
+        Config.url + Config.addtoCartURL,
+        data: model.toJson(),
+        options: Options(
+          headers: {
+            HttpHeaders.contentTypeHeader: "application/json",
+          },
+        ),
+      );
+      if (response.statusCode == 200) {
+        responseModel = CartResponseModel.fromJson(response.data);
+      }
+    } on DioError catch (e) {
+      if (e.response.statusCode == 400) {
+        print(e.response.statusCode);
+      } else {
+        print(e.message);
+        print(e.request);
+      }
+    }
+
+    return responseModel;
+  }
+
+  Future<CartResponseModel> getCartItems() async {
+    CartResponseModel responseModel;
+
+    try {
+      String url = Config.url +
+          Config.cartURL +
+          "?user_id=${Config.userId}&consumer_key=${Config.key}&consumer_secret=${Config.secret}";
+      print(url);
+
+      var response = await Dio().get(
+        url,
+        options: Options(
+          headers: {
+            HttpHeaders.contentTypeHeader: "application/json",
+          },
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        responseModel = CartResponseModel.fromJson(response.data);
+      }
+    } on DioError catch (e) {
+      print(e.response);
+    }
+
+    return responseModel;
   }
 } //ends here. methods above

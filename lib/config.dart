@@ -10,6 +10,9 @@ class Config {
   // tag ids need working on backend
   static String offersTagID = '264';
   static String trendingTagID = '265';
+  static String addtoCartURL = "addtocart";
+  static String cartURL = "cart";
+  static String userId = "5"; //for testing, pick from logged in user
 }
 
 //token key in auth wp-config
