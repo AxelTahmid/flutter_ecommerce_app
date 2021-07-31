@@ -27,7 +27,7 @@ class _ProductPageState extends BasePageState<ProductPage> {
     SortBy("price", "Price: High to Low", "desc"),
     SortBy("price", "Price: Low to High", "asc"),
   ];
-
+//, categoryId: this.widget.categoryId.toString()
   @override
   void initState() {
     var productList = Provider.of<ProductProvider>(context, listen: false);

@@ -99,10 +99,6 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                   width: 80,
                   height: 80,
                   alignment: Alignment.center,
-                  // child: Image.network(
-                  //   data.image.url,
-                  //   height: 80,
-                  // ),
                   child: data.image != null
                       ? ClipRRect(
                           borderRadius: BorderRadius.circular(50),
