@@ -7,8 +7,13 @@ class CartProvider with ChangeNotifier {
   APIService _apiService;
   List<CartItem> _cartItems;
 
-  List<CartItem> get CartItems => _cartItems;
+  List<CartItem> get cartItems => _cartItems;
   double get totalRecords => _cartItems.length.toDouble();
+  double get totalAmount => _cartItems != null
+      ? _cartItems
+          .map((e) => e.lineSubtotal)
+          .reduce((value, element) => value + element)
+      : 0;
 
   CartProvider() {
     _apiService = APIService();
@@ -45,6 +50,49 @@ class CartProvider with ChangeNotifier {
     }
 
     requestModel.products.add(product);
+
+    await _apiService.addtoCart(requestModel).then((cartResponseModel) {
+      if (cartResponseModel != null) {
+        _cartItems = [];
+        _cartItems.addAll(cartResponseModel.data);
+      }
+      onCallback(cartResponseModel);
+      notifyListeners();
+    });
+  }
+
+  fetchCartItems() async {
+    if (_cartItems == null) resetStreams();
+
+    await _apiService.getCartItems().then((cartResponseModel) {
+      if (cartResponseModel.data != null) {
+        _cartItems.addAll(cartResponseModel.data);
+      }
+      notifyListeners();
+    });
+  }
+
+  void updateQty(int productId, int qty) {
+    var isProductExist = _cartItems
+        .firstWhere((prd) => prd.productId == productId, orElse: () => null);
+
+    if (isProductExist != null) {
+      isProductExist.qty = qty;
+    }
+    notifyListeners();
+  }
+
+  void updateCart(Function onCallback) async {
+    CartRequestModel requestModel = CartRequestModel();
+    // requestModel.products = List<CartProducts>() ;
+    requestModel.products = [];
+
+    if (_cartItems == null) resetStreams();
+
+    _cartItems.forEach((element) {
+      requestModel.products.add(new CartProducts(
+          productId: element.productId, quantity: element.qty));
+    });
 
     await _apiService.addtoCart(requestModel).then((cartResponseModel) {
       if (cartResponseModel != null) {

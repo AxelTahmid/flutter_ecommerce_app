@@ -1,6 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:we_deliver_bd/models/cart_request_model.dart';
 import 'package:we_deliver_bd/models/product.dart';
+import 'package:we_deliver_bd/provider/cart_provider.dart';
+import 'package:we_deliver_bd/provider/loader_provider.dart';
 import 'package:we_deliver_bd/utils/custom_stepper.dart';
 import 'package:we_deliver_bd/utils/expand_text.dart';
 import 'package:we_deliver_bd/widgets/widget_related_products.dart';
@@ -9,8 +13,10 @@ class ProductDetailsWidget extends StatelessWidget {
   ProductDetailsWidget({Key key, this.data}) : super(key: key);
 
   Product data;
-  final CarouselController _controller = CarouselController();
   int qty = 0;
+
+  CartProducts cartProducts = CartProducts();
+  final CarouselController _controller = CarouselController();
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -83,11 +89,24 @@ class ProductDetailsWidget extends StatelessWidget {
                       iconSize: 22.0,
                       value: this.qty,
                       onChanged: (value) {
-                        print(value);
+                        cartProducts.quantity = value;
                       },
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Provider.of<LoaderProvider>(context, listen: false)
+                            .setLoadingStatus(true);
+                        var cartProvider =
+                            Provider.of<CartProvider>(context, listen: true);
+                        cartProducts.productId = data.id;
+                        cartProvider.addToCart(
+                          cartProducts,
+                          (val) {
+                            Provider.of<LoaderProvider>(context, listen: false)
+                                .setLoadingStatus(false);
+                          },
+                        );
+                      },
                       child: Text(
                         "Add to Cart",
                         style: TextStyle(

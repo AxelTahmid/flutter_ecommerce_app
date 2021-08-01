@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:we_deliver_bd/pages/cart_page.dart';
 import 'package:we_deliver_bd/pages/dashboard_page.dart';
 import 'package:we_deliver_bd/utils/cart_icons.dart';
 
@@ -12,7 +13,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<Widget> _widgetList = [
     DashboardPage(),
-    DashboardPage(),
+    CartPage(),
     DashboardPage(),
     DashboardPage()
   ];

@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:we_deliver_bd/pages/base_page.dart';
+import 'package:we_deliver_bd/pages/cart_page.dart';
 import 'package:we_deliver_bd/pages/home_page.dart';
+import 'package:we_deliver_bd/pages/product_details.dart';
 import 'package:we_deliver_bd/pages/product_page.dart';
+import 'package:we_deliver_bd/provider/cart_provider.dart';
+import 'package:we_deliver_bd/provider/loader_provider.dart';
 import 'package:we_deliver_bd/provider/products_provider.dart';
 
 void main() {
@@ -16,7 +21,19 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => ProductProvider(),
           child: ProductPage(),
-        )
+        ),
+        ChangeNotifierProvider(
+          create: (context) => LoaderProvider(),
+          child: BasePage(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => CartProvider(),
+          child: ProductDetails(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => CartProvider(),
+          child: CartPage(),
+        ),
       ],
       child: MaterialApp(
         title: 'WooCommerce App',
