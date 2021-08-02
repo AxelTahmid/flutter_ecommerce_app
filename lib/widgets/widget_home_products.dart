@@ -110,7 +110,7 @@ class _WidgetHomeProductsState extends State<WidgetHomeProducts> {
                   //   data.images[0].src,
                   //   height: 120,
                   // ),
-                  child: data.images != null
+                  child: data.images != null && data.images.length > 0
                       ? ClipRRect(
                           borderRadius: BorderRadius.circular(12),
                           child: Image.network(

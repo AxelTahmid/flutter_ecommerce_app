@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 class CartResponseModel {
   bool status;
   List<CartItem> data;
@@ -33,6 +35,9 @@ class CartItem {
   int qty;
   double lineSubtotal;
   double lineTotal;
+  int variationId;
+  String attribute;
+  String attributeValue;
 
   CartItem({
     this.productId,
@@ -43,6 +48,9 @@ class CartItem {
     this.qty,
     this.lineSubtotal,
     this.lineTotal,
+    this.variationId,
+    this.attribute,
+    this.attributeValue,
   });
 
   CartItem.fromJson(Map<String, dynamic> json) {
@@ -54,6 +62,14 @@ class CartItem {
     qty = json['qty'];
     lineSubtotal = double.parse(json['line_subtotal'].toString());
     lineTotal = double.parse(json['line_total'].toString());
+
+    variationId = json['variation_id'];
+    attribute = (json['attribute'].toString() != "[]")
+        ? Map<String, dynamic>.from(json['attribute']).keys.first.toString()
+        : "";
+    attributeValue = (json['attribute'].toString() != "[]")
+        ? Map<String, dynamic>.from(json['attribute']).values.first.toString()
+        : "";
   }
 
   Map<String, dynamic> toJson() {
@@ -66,6 +82,10 @@ class CartItem {
     data['qty'] = this.qty;
     data['line_subtotal'] = this.lineSubtotal;
     data['line_total'] = this.lineTotal;
+    data['variation_id'] = this.variationId;
+    //not needed, no method for it in api
+    // data['attribute' ] = this.attribute;
+    // data['attribute' ] =  this.attributeValue;
     return data;
   }
 }

@@ -9,6 +9,7 @@ import 'package:we_deliver_bd/models/category.dart';
 import 'package:we_deliver_bd/models/customer.dart';
 import 'package:we_deliver_bd/models/login_model.dart';
 import 'package:we_deliver_bd/models/product.dart';
+import 'package:we_deliver_bd/models/variable_product.dart';
 
 class APIService {
   Future<bool> createCustomer(CustomerModel model) async {
@@ -214,7 +215,7 @@ class APIService {
       String url = Config.url +
           Config.cartURL +
           "?user_id=${Config.userId}&consumer_key=${Config.key}&consumer_secret=${Config.secret}";
-      print(url);
+      // print(url);
 
       var response = await Dio().get(
         url,
@@ -227,6 +228,32 @@ class APIService {
 
       if (response.statusCode == 200) {
         responseModel = CartResponseModel.fromJson(response.data);
+      }
+    } on DioError catch (e) {
+      print(e.response);
+    }
+
+    return responseModel;
+  }
+
+  Future<List<VariableProduct>> getVariableProducts(int productId) async {
+    List<VariableProduct> responseModel;
+
+    try {
+      String url = Config.url +
+          Config.productsURL +
+          "/${productId.toString()}/${Config.variableProductsURL}?consumer_key=${Config.key}&consumer_secret=${Config.secret}";
+      // print(url);
+
+      var response = await Dio().get(url,
+          options: Options(headers: {
+            HttpHeaders.contentTypeHeader: "application/json",
+          }));
+
+      if (response.statusCode == 200) {
+        responseModel = (response.data as List)
+            .map((e) => VariableProduct.fromJson(e))
+            .toList();
       }
     } on DioError catch (e) {
       print(e.response);

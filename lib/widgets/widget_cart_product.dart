@@ -3,7 +3,9 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:we_deliver_bd/models/cart_response_model.dart';
 import 'package:we_deliver_bd/provider/cart_provider.dart';
+import 'package:we_deliver_bd/provider/loader_provider.dart';
 import 'package:we_deliver_bd/utils/custom_stepper.dart';
+import 'package:we_deliver_bd/utils/utils.dart';
 
 class CartProduct extends StatelessWidget {
   CartProduct({Key key, this.data}) : super(key: key);
@@ -35,7 +37,9 @@ class CartProduct extends StatelessWidget {
         title: Padding(
           padding: EdgeInsets.all(5),
           child: Text(
-            data.productName,
+            data.variationId == 0
+                ? data.productName
+                : "${data.productName} (${data.attributeValue}${data.attribute})",
             style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,
@@ -54,7 +58,29 @@ class CartProduct extends StatelessWidget {
                 ),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Utils.showMessage(
+                    context,
+                    "WeDeliver",
+                    "Do you want to remove this item?",
+                    "Yes",
+                    () {
+                      Provider.of<LoaderProvider>(context, listen: false)
+                          .setLoadingStatus(true);
+                      Provider.of<CartProvider>(context, listen: false)
+                          .removeItem(data.productId);
+                      Provider.of<LoaderProvider>(context, listen: false)
+                          .setLoadingStatus(false);
+
+                      Navigator.of(context).pop();
+                    },
+                    buttonText2: "No",
+                    isConfirmationDialog: true,
+                    onPressed2: () {
+                      Navigator.of(context).pop();
+                    },
+                  );
+                },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -89,8 +115,9 @@ class CartProduct extends StatelessWidget {
             iconSize: 22.0,
             value: data.qty,
             onChanged: (value) {
-              Provider.of<CartProvider>(context, listen: false)
-                  .updateQty(data.productId, value);
+              Provider.of<CartProvider>(context, listen: false).updateQty(
+                  data.productId, value,
+                  variationId: data.variationId);
             },
           ),
         ),

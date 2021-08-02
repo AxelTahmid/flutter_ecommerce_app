@@ -7,13 +7,15 @@ class Config {
       "https://wedeliver-bd.com//wp-json/jwt-auth/v1/token";
   static String categoriesURL = "products/categories";
   static String productsURL = "products";
-  // tag ids need working on backend
   static String offersTagID = '264';
   static String trendingTagID = '265';
   static String addtoCartURL = "addtocart";
   static String cartURL = "cart";
   static String userId = "5"; //for testing, pick from logged in user
+  static String variableProductsURL = "variations";
 }
+
+//max 10 items shown in category lists, top saver, top trending
 
 //token key in auth wp-config
 // define('JWT_AUTH_SECRET_KEY', 'jU&f@]6-RN>[9EM:bL^19@@==-,q1G5UW[xF-JDR0^%bRw1rvW~Gq-+T+eAMJG0@');

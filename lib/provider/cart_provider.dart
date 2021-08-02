@@ -33,15 +33,24 @@ class CartProvider with ChangeNotifier {
     // requestModel.products = List<CartProducts>() ;
     requestModel.products = [];
 
-    if (_cartItems == null) resetStreams();
+    if (_cartItems == null) {
+      await fetchCartItems();
+    }
 
-    _cartItems.forEach((element) {
-      requestModel.products.add(new CartProducts(
-          productId: element.productId, quantity: element.qty));
+    _cartItems.forEach((e) {
+      requestModel.products.add(
+        new CartProducts(
+          productId: e.productId,
+          quantity: e.qty,
+          variationId: e.variationId,
+        ),
+      );
     });
 
     var isProductExist = requestModel.products.firstWhere(
-      (prd) => prd.productId == product.productId,
+      (prd) =>
+          prd.productId == product.productId &&
+          prd.variationId == product.variationId,
       orElse: () => null,
     );
 
@@ -72,9 +81,10 @@ class CartProvider with ChangeNotifier {
     });
   }
 
-  void updateQty(int productId, int qty) {
-    var isProductExist = _cartItems
-        .firstWhere((prd) => prd.productId == productId, orElse: () => null);
+  void updateQty(int productId, int qty, {int variationId = 0}) {
+    var isProductExist = _cartItems.firstWhere(
+        (prd) => prd.productId == productId && prd.variationId == variationId,
+        orElse: () => null);
 
     if (isProductExist != null) {
       isProductExist.qty = qty;
@@ -89,9 +99,14 @@ class CartProvider with ChangeNotifier {
 
     if (_cartItems == null) resetStreams();
 
-    _cartItems.forEach((element) {
-      requestModel.products.add(new CartProducts(
-          productId: element.productId, quantity: element.qty));
+    _cartItems.forEach((e) {
+      requestModel.products.add(
+        new CartProducts(
+          productId: e.productId,
+          quantity: e.qty,
+          variationId: e.variationId,
+        ),
+      );
     });
 
     await _apiService.addtoCart(requestModel).then((cartResponseModel) {
@@ -102,5 +117,15 @@ class CartProvider with ChangeNotifier {
       onCallback(cartResponseModel);
       notifyListeners();
     });
+  }
+
+  void removeItem(int productId) {
+    var isProductExist = _cartItems
+        .firstWhere((prd) => prd.productId == productId, orElse: () => null);
+
+    if (isProductExist != null) {
+      _cartItems.remove(isProductExist);
+    }
+    notifyListeners();
   }
 }

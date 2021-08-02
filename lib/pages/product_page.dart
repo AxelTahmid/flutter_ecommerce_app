@@ -33,13 +33,15 @@ class _ProductPageState extends BasePageState<ProductPage> {
     var productList = Provider.of<ProductProvider>(context, listen: false);
     productList.resetStreams();
     productList.setLoadingState(LoadMoreStatus.INITIAL);
-    productList.fetchProducts(_page);
+    productList.fetchProducts(_page,
+        categoryId: this.widget.categoryId.toString());
 
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
         productList.setLoadingState(LoadMoreStatus.LOADING);
-        productList.fetchProducts(++_page);
+        productList.fetchProducts(++_page,
+            categoryId: this.widget.categoryId.toString());
       }
     });
     //filter with category id here. has issues with debugger
@@ -55,7 +57,9 @@ class _ProductPageState extends BasePageState<ProductPage> {
     _debounce = Timer(const Duration(milliseconds: 2000), () {
       productList.resetStreams();
       productList.setLoadingState(LoadMoreStatus.INITIAL);
-      productList.fetchProducts(_page, strSerarch: _searchQuery.text);
+      productList.fetchProducts(_page,
+          strSerarch: _searchQuery.text,
+          categoryId: this.widget.categoryId.toString());
     });
   }
 
@@ -146,7 +150,8 @@ class _ProductPageState extends BasePageState<ProductPage> {
                     Provider.of<ProductProvider>(context, listen: false);
                 productList.resetStreams();
                 productList.setSortOrder(sortBy);
-                productList.fetchProducts(_page);
+                productList.fetchProducts(_page,
+                    categoryId: this.widget.categoryId.toString());
               }, // write code later
               itemBuilder: (BuildContext context) {
                 return _sortByOptions.map((item) {

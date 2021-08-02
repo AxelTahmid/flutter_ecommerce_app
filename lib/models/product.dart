@@ -1,3 +1,5 @@
+import 'package:we_deliver_bd/models/variable_product.dart';
+
 class Product {
   int id;
   String name;
@@ -12,6 +14,8 @@ class Product {
   List<Categories> categories;
   List<Attributes> attributes;
   List<int> relatedIds;
+  String type;
+  VariableProduct variableProduct;
 
   Product({
     this.id,
@@ -25,6 +29,8 @@ class Product {
     this.stockStatus,
     this.attributes,
     this.relatedIds,
+    this.type,
+    this.variableProduct,
   });
 
   Product.fromJson(Map<String, dynamic> json) {
@@ -41,6 +47,7 @@ class Product {
 
     stockStatus = json['stock_status'];
     relatedIds = json['cross_sell_ids'].cast<int>();
+    type = json['type'];
 
     if (json['categories'] != null) {
       List<Categories> categories = [];
@@ -64,12 +71,15 @@ class Product {
   }
 
   calculateDiscount() {
-    double regularPrice = double.parse(this.regularPrice);
-    double salePrice =
-        this.salePrice != "" ? double.parse(this.salePrice) : regularPrice;
-    double discount = regularPrice - salePrice;
-    double disPercent = (discount / regularPrice) * 100;
+    double disPercent = 0;
 
+    if (this.regularPrice != "") {
+      double regularPrice = double.parse(this.regularPrice);
+      double salePrice =
+          this.salePrice != "" ? double.parse(this.salePrice) : regularPrice;
+      double discount = regularPrice - salePrice;
+      disPercent = (discount / regularPrice) * 100;
+    }
     return disPercent.round();
   }
 }
@@ -86,7 +96,7 @@ class Categories {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['id'] = this.id;
     data['name'] = this.name;
     return data;
@@ -105,16 +115,38 @@ class Images {
   }
 }
 
+// class Attributes {
+//   int id;
+//   String name;
+//   List<String> options;
+
+//   Attributes({this.id, this.name, this.options});
+
+//   Attributes.fromJson(Map<String, dynamic> json) {
+//     id = json["id"];
+//     name = json["name"];
+//     options = json["options"].cast<String>();
+//   }
+// }
+
 class Attributes {
   int id;
   String name;
-  List<String> options;
+  List<String> option;
 
-  Attributes({this.id, this.name, this.options});
+  Attributes({this.id, this.name, this.option});
 
   Attributes.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     name = json["name"];
-    options = json["options"].cast<String>();
+    option = json["option"].cast<String>();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = Map<String, dynamic>();
+
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['option'] = this.option;
   }
 }
