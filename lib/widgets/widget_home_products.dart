@@ -5,6 +5,8 @@ import 'package:we_deliver_bd/models/product.dart';
 import 'package:we_deliver_bd/pages/product_details.dart';
 import 'package:we_deliver_bd/pages/product_page.dart';
 
+import '../color_constants.dart';
+
 class WidgetHomeProducts extends StatefulWidget {
   WidgetHomeProducts({Key key, this.labelName, this.tagId}) : super(key: key);
   String labelName;
@@ -48,7 +50,7 @@ class _WidgetHomeProductsState extends State<WidgetHomeProducts> {
                   onPressed: () {},
                   child: Text(
                     'View All',
-                    style: TextStyle(color: Colors.redAccent),
+                    style: TextStyle(color: ColorConstants.kPrimaryLightColor),
                   ),
                 ),
               ),
@@ -140,7 +142,7 @@ class _WidgetHomeProductsState extends State<WidgetHomeProducts> {
                     data.name,
                     style: TextStyle(
                       fontSize: 14,
-                      color: Colors.black,
+                      color: ColorConstants.kSecondaryTextColor,
                     ),
                   ),
                 ),
@@ -155,7 +157,7 @@ class _WidgetHomeProductsState extends State<WidgetHomeProducts> {
                         style: TextStyle(
                           fontSize: 14,
                           decoration: TextDecoration.lineThrough,
-                          color: Colors.redAccent,
+                          color: ColorConstants.kPrimaryLightColor,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -163,7 +165,7 @@ class _WidgetHomeProductsState extends State<WidgetHomeProducts> {
                         ' ${data.salePrice}৳',
                         style: TextStyle(
                           fontSize: 14,
-                          color: Colors.black,
+                          color: ColorConstants.kSecondaryTextColor,
                           fontWeight: FontWeight.bold,
                         ),
                       )

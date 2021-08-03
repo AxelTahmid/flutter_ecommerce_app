@@ -62,6 +62,7 @@ class CartProvider with ChangeNotifier {
 
     await _apiService.addtoCart(requestModel).then((cartResponseModel) {
       if (cartResponseModel != null) {
+        //check with breakpoint
         _cartItems = [];
         _cartItems.addAll(cartResponseModel.data);
       }

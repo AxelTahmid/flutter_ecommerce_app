@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-
 class CartResponseModel {
   bool status;
   List<CartItem> data;

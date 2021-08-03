@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:we_deliver_bd/models/product.dart';
 import 'package:we_deliver_bd/pages/product_details.dart';
 
+import '../color_constants.dart';
+
 class ProductCard extends StatelessWidget {
   ProductCard({Key key, this.data}) : super(key: key);
 
@@ -46,13 +48,13 @@ class ProductCard extends StatelessWidget {
                       child: Container(
                         padding: EdgeInsets.all(5),
                         decoration: BoxDecoration(
-                          color: Colors.green,
+                          color: ColorConstants.kSecondaryColor,
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Text(
                           '${data.calculateDiscount()}% OFF',
                           style: TextStyle(
-                            color: Colors.white,
+                            color: ColorConstants.kPrimaryTextColor,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
@@ -83,7 +85,7 @@ class ProductCard extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 14,
-                      color: Colors.black,
+                      color: ColorConstants.kSecondaryTextColor,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -97,7 +99,7 @@ class ProductCard extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 14,
                             decoration: TextDecoration.lineThrough,
-                            color: Colors.redAccent,
+                            color: ColorConstants.kPrimaryLightColor,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -106,7 +108,7 @@ class ProductCard extends StatelessWidget {
                         ' ${data.salePrice}৳',
                         style: TextStyle(
                           fontSize: 14,
-                          color: Colors.black,
+                          color: ColorConstants.kSecondaryTextColor,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

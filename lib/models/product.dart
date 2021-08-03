@@ -139,7 +139,8 @@ class Attributes {
   Attributes.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     name = json["name"];
-    option = json["option"].cast<String>();
+    // option = json["option"].cast<String>(); //temp fix
+    option = (json["option"] != null) ? json["option"].cast<String>() : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -148,5 +149,7 @@ class Attributes {
     data['id'] = this.id;
     data['name'] = this.name;
     data['option'] = this.option;
+
+    return data;
   }
 }

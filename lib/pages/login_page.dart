@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:we_deliver_bd/api_service.dart';
+import 'package:we_deliver_bd/color_constants.dart';
 import 'package:we_deliver_bd/utils/ProgressHUD.dart';
 import 'package:we_deliver_bd/utils/form_helper.dart';
 
@@ -163,7 +164,8 @@ class _LoginPageState extends State<LoginPage> {
                           },
                           child: Text(
                             "Login",
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(
+                                color: ColorConstants.kPrimaryTextColor),
                           ),
                           // color: Theme.of(context).accentColor,
                           // shape: StadiumBorder(),

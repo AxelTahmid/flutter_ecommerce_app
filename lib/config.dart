@@ -11,7 +11,7 @@ class Config {
   static String trendingTagID = '265';
   static String addtoCartURL = "addtocart";
   static String cartURL = "cart";
-  static String userId = "5"; //for testing, pick from logged in user
+  static String userId = "20"; //for testing, picked my id
   static String variableProductsURL = "variations";
 }
 

@@ -5,6 +5,8 @@ import 'package:we_deliver_bd/utils/ProgressHUD.dart';
 import 'package:we_deliver_bd/utils/form_helper.dart';
 import 'package:we_deliver_bd/utils/validator_service.dart';
 
+import '../color_constants.dart';
+
 class SignupPage extends StatefulWidget {
   // const SignupPage({Key? key}) : super(key: key);
 
@@ -30,7 +32,7 @@ class _SignupPageState extends State<SignupPage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.redAccent,
+        backgroundColor: ColorConstants.kPrimaryLightColor,
         automaticallyImplyLeading: true,
         title: Text("Sign Up"),
       ),

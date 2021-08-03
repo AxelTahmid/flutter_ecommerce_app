@@ -63,5 +63,7 @@ class Attributes {
     data['id'] = this.id;
     data['name'] = this.name;
     data['option'] = this.option;
+
+    return data;
   }
 }

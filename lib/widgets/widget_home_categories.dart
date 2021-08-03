@@ -3,6 +3,8 @@ import 'package:we_deliver_bd/api_service.dart';
 import 'package:we_deliver_bd/models/category.dart' as categoryModel;
 import 'package:we_deliver_bd/pages/product_page.dart';
 
+import '../color_constants.dart';
+
 class WidgetCategories extends StatefulWidget {
   // WidgetCategories({Key? key}) : super(key: key);
 
@@ -39,7 +41,7 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                 padding: EdgeInsets.only(left: 16, top: 10, right: 10),
                 child: Text(
                   'View All',
-                  style: TextStyle(color: Colors.redAccent),
+                  style: TextStyle(color: ColorConstants.kPrimaryLightColor),
                 ),
               )
             ],

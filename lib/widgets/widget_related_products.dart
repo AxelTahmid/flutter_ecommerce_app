@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:we_deliver_bd/api_service.dart';
 import 'package:we_deliver_bd/models/product.dart';
 
+import '../color_constants.dart';
+
 //does same as home products but with numbers instead of tagname, work on rdudancy later
 class WidgetRelatedProducts extends StatefulWidget {
   WidgetRelatedProducts({Key key, this.labelName, this.products})
@@ -48,7 +50,7 @@ class _WidgetRelatedProductsState extends State<WidgetRelatedProducts> {
                   onPressed: () {},
                   child: Text(
                     'View All',
-                    style: TextStyle(color: Colors.redAccent),
+                    style: TextStyle(color: ColorConstants.kPrimaryLightColor),
                   ),
                 ),
               ),
@@ -129,7 +131,7 @@ class _WidgetRelatedProductsState extends State<WidgetRelatedProducts> {
                   data.name,
                   style: TextStyle(
                     fontSize: 14,
-                    color: Colors.black,
+                    color: ColorConstants.kSecondaryTextColor,
                   ),
                 ),
               ),
@@ -144,7 +146,7 @@ class _WidgetRelatedProductsState extends State<WidgetRelatedProducts> {
                       style: TextStyle(
                         fontSize: 14,
                         decoration: TextDecoration.lineThrough,
-                        color: Colors.redAccent,
+                        color: ColorConstants.kPrimaryLightColor,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -152,7 +154,7 @@ class _WidgetRelatedProductsState extends State<WidgetRelatedProducts> {
                       ' ${data.salePrice}৳',
                       style: TextStyle(
                         fontSize: 14,
-                        color: Colors.black,
+                        color: ColorConstants.kSecondaryTextColor,
                         fontWeight: FontWeight.bold,
                       ),
                     )

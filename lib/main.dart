@@ -9,6 +9,8 @@ import 'package:we_deliver_bd/provider/cart_provider.dart';
 import 'package:we_deliver_bd/provider/loader_provider.dart';
 import 'package:we_deliver_bd/provider/products_provider.dart';
 
+import 'color_constants.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -45,13 +47,14 @@ class MyApp extends StatelessWidget {
             elevation: 0,
             foregroundColor: Colors.white,
           ),
-          accentColor: Colors.redAccent,
+          accentColor: ColorConstants.kPrimaryLightColor,
           textTheme: TextTheme(
-              headline1: TextStyle(fontSize: 22.0, color: Colors.redAccent),
+              headline1: TextStyle(
+                  fontSize: 22.0, color: ColorConstants.kPrimaryLightColor),
               headline2: TextStyle(
                 fontSize: 24.0,
                 fontWeight: FontWeight.w700,
-                color: Colors.redAccent,
+                color: ColorConstants.kPrimaryLightColor,
               ),
               bodyText1: TextStyle(
                 fontSize: 14.0,

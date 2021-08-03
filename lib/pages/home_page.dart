@@ -3,6 +3,8 @@ import 'package:we_deliver_bd/pages/cart_page.dart';
 import 'package:we_deliver_bd/pages/dashboard_page.dart';
 import 'package:we_deliver_bd/utils/cart_icons.dart';
 
+import '../color_constants.dart';
+
 class HomePage extends StatefulWidget {
   // HomePage({Key? key}) : super(key: key);
 
@@ -31,22 +33,22 @@ class _HomePageState extends State<HomePage> {
             //   ' Store ',
             //   style: TextStyle(),
             // ),
-            label: 'Store',
+            label: ' Store',
           ),
           BottomNavigationBarItem(
             icon: Icon(CartIcons.cart),
-            label: 'My Cart ',
+            label: 'My Cart',
           ),
           BottomNavigationBarItem(
             icon: Icon(CartIcons.favourites),
-            label: 'Favourites ',
+            label: 'Favourites',
           ),
           BottomNavigationBarItem(
             icon: Icon(CartIcons.account),
-            label: 'My Account ',
+            label: 'My Account',
           ),
         ],
-        selectedItemColor: Colors.redAccent,
+        selectedItemColor: ColorConstants.kPrimaryLightColor,
         unselectedItemColor: Colors.black,
         type: BottomNavigationBarType.shifting,
         currentIndex: _index,
@@ -65,23 +67,23 @@ class _HomePageState extends State<HomePage> {
       centerTitle: true,
       brightness: Brightness.dark,
       elevation: 0,
-      backgroundColor: Colors.redAccent,
+      backgroundColor: ColorConstants.kPrimaryLightColor,
       automaticallyImplyLeading: false,
       title: Text(
         "WeDeliver App",
-        style: TextStyle(color: Colors.white),
+        style: TextStyle(color: ColorConstants.kPrimaryTextColor),
       ),
       actions: [
         Icon(
           Icons.notifications_none,
-          color: Colors.white,
+          color: ColorConstants.kPrimaryTextColor,
         ),
         SizedBox(
           width: 10,
         ),
         Icon(
           Icons.shopping_cart,
-          color: Colors.white,
+          color: ColorConstants.kPrimaryTextColor,
         ),
         SizedBox(
           width: 10,

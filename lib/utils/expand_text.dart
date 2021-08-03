@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/style.dart';
+import 'package:we_deliver_bd/color_constants.dart';
 
 class ExpandText extends StatefulWidget {
   ExpandText({Key key, this.labelHeader, this.desc, this.shortDesc})
@@ -32,7 +33,7 @@ class _ExpandTextState extends State<ExpandText> {
             this.widget.labelHeader,
             style: TextStyle(
               fontSize: 15,
-              color: Colors.black,
+              color: ColorConstants.kSecondaryTextColor,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -50,7 +51,7 @@ class _ExpandTextState extends State<ExpandText> {
               child: Text(
                 descTextShowFlag ? "Show Less" : "Show More",
                 style: TextStyle(
-                  color: Colors.blue,
+                  color: ColorConstants.kPrimaryLightColor,
                 ),
               ),
               onTap: () {

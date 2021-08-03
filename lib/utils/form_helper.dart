@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../color_constants.dart';
+
 class FormHelper {
   static Widget textInput(
     BuildContext context,
@@ -85,11 +87,11 @@ class FormHelper {
         child: Container(
           decoration: BoxDecoration(
             border: Border.all(
-              color: Colors.redAccent,
+              color: ColorConstants.kPrimaryLightColor,
               style: BorderStyle.solid,
               width: 1.0,
             ),
-            color: Colors.redAccent,
+            color: ColorConstants.kPrimaryLightColor,
             borderRadius: BorderRadius.circular(30.0),
           ),
           child: Row(
@@ -99,7 +101,7 @@ class FormHelper {
                 child: Text(
                   buttonText,
                   style: TextStyle(
-                    color: Colors.white,
+                    color: ColorConstants.kPrimaryTextColor,
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                     letterSpacing: 1,

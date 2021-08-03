@@ -7,6 +7,8 @@ import 'package:we_deliver_bd/provider/loader_provider.dart';
 import 'package:we_deliver_bd/utils/custom_stepper.dart';
 import 'package:we_deliver_bd/utils/utils.dart';
 
+import '../color_constants.dart';
+
 class CartProduct extends StatelessWidget {
   CartProduct({Key key, this.data}) : super(key: key);
   CartItem data;
@@ -41,7 +43,7 @@ class CartProduct extends StatelessWidget {
                 ? data.productName
                 : "${data.productName} (${data.attributeValue}${data.attribute})",
             style: TextStyle(
-              color: Colors.black,
+              color: ColorConstants.kSecondaryTextColor,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -54,7 +56,7 @@ class CartProduct extends StatelessWidget {
               Text(
                 "${data.productSalePrice.toString()}৳",
                 style: TextStyle(
-                  color: Colors.black,
+                  color: ColorConstants.kSecondaryTextColor,
                 ),
               ),
               TextButton(
@@ -86,20 +88,20 @@ class CartProduct extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.delete,
-                      color: Colors.white,
+                      color: ColorConstants.kPrimaryTextColor,
                       size: 20,
                     ),
                     Text(
                       "Remove",
                       style: TextStyle(
-                        color: Colors.white,
+                        color: ColorConstants.kPrimaryTextColor,
                       ),
                     ),
                   ],
                 ),
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.all(8),
-                  backgroundColor: Colors.redAccent,
+                  backgroundColor: ColorConstants.kPrimaryLightColor,
                   shape: StadiumBorder(),
                 ),
               ),

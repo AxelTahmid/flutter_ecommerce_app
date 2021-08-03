@@ -10,6 +10,8 @@ import 'package:we_deliver_bd/utils/custom_stepper.dart';
 import 'package:we_deliver_bd/utils/expand_text.dart';
 import 'package:we_deliver_bd/widgets/widget_related_products.dart';
 
+import '../color_constants.dart';
+
 class ProductDetailsWidget extends StatelessWidget {
   ProductDetailsWidget({Key key, this.data, this.variableProducts})
       : super(key: key);
@@ -43,11 +45,13 @@ class ProductDetailsWidget extends StatelessWidget {
                     alignment: Alignment.topLeft,
                     child: Container(
                       padding: EdgeInsets.all(5),
-                      decoration: BoxDecoration(color: Colors.green),
+                      decoration:
+                          BoxDecoration(color: ColorConstants.kSecondaryColor),
                       child: Text(
                         '${data.calculateDiscount()}% OFF',
                         style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
+                            color: ColorConstants.kPrimaryTextColor,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
@@ -58,7 +62,7 @@ class ProductDetailsWidget extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 25,
-                    color: Colors.black,
+                    color: ColorConstants.kSecondaryTextColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -100,7 +104,7 @@ class ProductDetailsWidget extends StatelessWidget {
                       '${data.price}৳',
                       style: TextStyle(
                         fontSize: 25,
-                        color: Colors.black,
+                        color: ColorConstants.kSecondaryTextColor,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -142,11 +146,11 @@ class ProductDetailsWidget extends StatelessWidget {
                       child: Text(
                         "Add to Cart",
                         style: TextStyle(
-                          color: Colors.white,
+                          color: ColorConstants.kPrimaryTextColor,
                         ),
                       ),
                       style: TextButton.styleFrom(
-                        backgroundColor: Colors.redAccent,
+                        backgroundColor: ColorConstants.kPrimaryLightColor,
                         padding: EdgeInsets.all(15),
                         shape: StadiumBorder(),
                       ),
@@ -267,7 +271,8 @@ class ProductDetailsWidget extends StatelessWidget {
                         data.attributes.first.option.toString() +
                             " " +
                             data.attributes.first.name.toString(),
-                        style: TextStyle(color: Colors.black),
+                        style: TextStyle(
+                            color: ColorConstants.kSecondaryTextColor),
                       ),
                     );
                   },

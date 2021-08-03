@@ -6,6 +6,8 @@ import 'package:we_deliver_bd/provider/loader_provider.dart';
 import 'package:we_deliver_bd/utils/ProgressHUD.dart';
 import 'package:we_deliver_bd/widgets/widget_cart_product.dart';
 
+import '../color_constants.dart';
+
 class CartPage extends StatefulWidget {
   // CartPage({Key key}) : super(key: key);
   @override
@@ -38,7 +40,7 @@ class _CartPageState extends State<CartPage> {
 }
 
 Widget _cartItemsList() {
-  return new Consumer<CartProvider>(
+  return Consumer<CartProvider>(
     builder: (context, cartModel, child) {
       if (cartModel.cartItems != null && cartModel.cartItems.length > 0) {
         return Column(
@@ -72,11 +74,12 @@ Widget _cartItemsList() {
                     children: [
                       Icon(
                         Icons.sync,
-                        color: Colors.white,
+                        color: ColorConstants.kPrimaryTextColor,
                       ),
                       Text(
                         " Update Cart",
-                        style: TextStyle(color: Colors.white),
+                        style:
+                            TextStyle(color: ColorConstants.kPrimaryTextColor),
                       ),
                     ],
                   ),
@@ -95,14 +98,14 @@ Widget _cartItemsList() {
                   },
                   style: TextButton.styleFrom(
                     padding: EdgeInsets.all(15),
-                    backgroundColor: Colors.green,
+                    backgroundColor: ColorConstants.kSecondaryColor,
                     shape: StadiumBorder(),
                   ),
                 ),
               ),
             ),
             Container(
-              color: Colors.white,
+              color: ColorConstants.kPrimaryTextColor,
               width: MediaQuery.of(context).size.width,
               height: 100,
               child: Padding(
@@ -138,18 +141,19 @@ Widget _cartItemsList() {
                         children: [
                           Text(
                             "Checkout:",
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(
+                                color: ColorConstants.kPrimaryTextColor),
                           ),
                           Icon(
                             Icons.chevron_right,
-                            color: Colors.white,
+                            color: ColorConstants.kPrimaryTextColor,
                           ),
                         ],
                       ),
                       onPressed: () {},
                       style: TextButton.styleFrom(
                         padding: EdgeInsets.all(15),
-                        backgroundColor: Colors.redAccent,
+                        backgroundColor: ColorConstants.kPrimaryLightColor,
                         shape: StadiumBorder(),
                       ),
                     ),
@@ -158,6 +162,10 @@ Widget _cartItemsList() {
               ),
             ),
           ],
+        );
+      } else {
+        return Container(
+          child: Text('No Cart Items, Null return'),
         );
       }
     },
