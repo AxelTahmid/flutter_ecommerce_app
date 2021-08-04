@@ -47,14 +47,14 @@ class VariableProduct {
 class Attributes {
   int id;
   String name;
-  List<String> option;
+  String option;
 
   Attributes({this.id, this.name, this.option});
 
   Attributes.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     name = json["name"];
-    option = json["option"].cast<String>();
+    option = json["option"];
   }
 
   Map<String, dynamic> toJson() {

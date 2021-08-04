@@ -50,7 +50,7 @@ class Product {
     type = json['type'];
 
     if (json['categories'] != null) {
-      List<Categories> categories = [];
+      categories = [];
       json['categories'].forEach((v) {
         categories.add(new Categories.fromJson(v));
       });
@@ -115,32 +115,17 @@ class Images {
   }
 }
 
-// class Attributes {
-//   int id;
-//   String name;
-//   List<String> options;
-
-//   Attributes({this.id, this.name, this.options});
-
-//   Attributes.fromJson(Map<String, dynamic> json) {
-//     id = json["id"];
-//     name = json["name"];
-//     options = json["options"].cast<String>();
-//   }
-// }
-
 class Attributes {
   int id;
   String name;
-  List<String> option;
+  String option;
 
   Attributes({this.id, this.name, this.option});
 
   Attributes.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     name = json["name"];
-    // option = json["option"].cast<String>(); //temp fix
-    option = (json["option"] != null) ? json["option"].cast<String>() : null;
+    option = json["option"];
   }
 
   Map<String, dynamic> toJson() {

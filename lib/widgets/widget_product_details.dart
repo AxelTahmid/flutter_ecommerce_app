@@ -74,8 +74,9 @@ class ProductDetailsWidget extends StatelessWidget {
                       visible: data.type != "variable",
                       child: Text(
                         //test out later for results. currently not showing
+                        // /? (data.attributes[0].option.join("-").toString() +
                         data.attributes != null && data.attributes.length > 0
-                            ? (data.attributes[0].option.join("-").toString() +
+                            ? (data.attributes[0].option.toString() +
                                 "" +
                                 data.attributes[0].name)
                             : "",

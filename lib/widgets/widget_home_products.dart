@@ -4,6 +4,7 @@ import 'package:we_deliver_bd/api_service.dart';
 import 'package:we_deliver_bd/models/product.dart';
 import 'package:we_deliver_bd/pages/product_details.dart';
 import 'package:we_deliver_bd/pages/product_page.dart';
+import 'package:we_deliver_bd/widgets/widget_product_card.dart';
 
 import '../color_constants.dart';
 
@@ -80,7 +81,7 @@ class _WidgetHomeProductsState extends State<WidgetHomeProducts> {
   Widget _buildProductsList(List<Product> items) {
     return Container(
       height: 200,
-      alignment: Alignment.centerLeft,
+      alignment: Alignment.topLeft,
       child: ListView.builder(
         shrinkWrap: true,
         physics: ClampingScrollPhysics(),
@@ -88,93 +89,7 @@ class _WidgetHomeProductsState extends State<WidgetHomeProducts> {
         itemCount: items.length,
         itemBuilder: (context, index) {
           var data = items[index];
-          return GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ProductDetails(
-                    product: data,
-                  ),
-                ),
-              );
-            },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.all(10),
-                  width: 130,
-                  height: 120,
-                  alignment: Alignment.center,
-                  // child: Image.network(
-                  //   data.images[0].src,
-                  //   height: 120,
-                  // ),
-                  child: data.images != null && data.images.length > 0
-                      ? ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child: Image.network(
-                            data.images[0].src,
-                            fit: BoxFit.cover,
-                          ),
-                        )
-                      : Image.network(
-                          "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1200px-No_image_available.svg.png",
-                        ), //SizedBox.shrink(),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(12),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.black12,
-                          offset: Offset(0, 5),
-                          blurRadius: 15),
-                    ],
-                  ),
-                ),
-                Container(
-                  width: 130,
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    data.name,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: ColorConstants.kSecondaryTextColor,
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 4, left: 4),
-                  width: 130,
-                  alignment: Alignment.centerLeft,
-                  child: Row(
-                    children: [
-                      Text(
-                        '${data.regularPrice}৳',
-                        style: TextStyle(
-                          fontSize: 14,
-                          decoration: TextDecoration.lineThrough,
-                          color: ColorConstants.kPrimaryLightColor,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        ' ${data.salePrice}৳',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: ColorConstants.kSecondaryTextColor,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          );
+          return ProductCard(data: data);
         },
       ),
     );

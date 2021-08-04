@@ -19,7 +19,7 @@ class BasePageState<T extends BasePage> extends State<T> {
   @override
   void initState() {
     super.initState();
-    print('BasePage: initState()');
+    //print('BasePage: initState()');
 
     // var mastersBloc = Provider.of<MastersProvider>(context, listen: false);
     // mastersBloc.resetStreams();
@@ -47,7 +47,7 @@ class BasePageState<T extends BasePage> extends State<T> {
       centerTitle: true,
       brightness: Brightness.dark,
       elevation: 0,
-      backgroundColor: ColorConstants.kPrimaryLightColor,
+      backgroundColor: Colors.green,
       automaticallyImplyLeading: true,
       title: Text(
         pageTitle,

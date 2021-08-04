@@ -22,7 +22,7 @@ class _DashboardPageState extends State<DashboardPage> {
             imageCarousel(context),
             WidgetCategories(),
             WidgetHomeProducts(
-              labelName: "Top Savers Today!",
+              labelName: "Top Savers For Today!",
               tagId: Config.offersTagID,
             ),
             WidgetHomeProducts(

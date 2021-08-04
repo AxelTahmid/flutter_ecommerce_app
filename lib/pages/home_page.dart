@@ -29,10 +29,6 @@ class _HomePageState extends State<HomePage> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(CartIcons.home),
-            // title: Text(
-            //   ' Store ',
-            //   style: TextStyle(),
-            // ),
             label: ' Store',
           ),
           BottomNavigationBarItem(
@@ -48,7 +44,7 @@ class _HomePageState extends State<HomePage> {
             label: 'My Account',
           ),
         ],
-        selectedItemColor: ColorConstants.kPrimaryLightColor,
+        selectedItemColor: Colors.green,
         unselectedItemColor: Colors.black,
         type: BottomNavigationBarType.shifting,
         currentIndex: _index,
@@ -67,7 +63,7 @@ class _HomePageState extends State<HomePage> {
       centerTitle: true,
       brightness: Brightness.dark,
       elevation: 0,
-      backgroundColor: ColorConstants.kPrimaryLightColor,
+      backgroundColor: Colors.green,
       automaticallyImplyLeading: false,
       title: Text(
         "WeDeliver App",

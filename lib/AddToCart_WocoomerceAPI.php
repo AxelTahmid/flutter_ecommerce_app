@@ -1,8 +1,7 @@
-<!-- editing direction -->
-<!-- woocommerce\packages\woocommerce-rest-api\src\Controllers\version3\class-wc-rest-webhooks-controller.php -->
-
 <?php
+includes/rest-api/Controllers/Version3/class-wc-rest-webhooks-controller.php
 
+/** woocommerce\packages\woocommerce-rest-api\src\Controllers\version3\class-wc-rest-webhooks-controller.php */
 /**
  * REST API Webhooks controller
  *
