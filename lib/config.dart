@@ -13,7 +13,7 @@ class Config {
   static String trendingTagID = '265';
   static String addtoCartURL = "addtocart";
   static String cartURL = "cart";
-  static String userId = "20"; //for testing, picked my id
+  static int userId = 20; //for testing, picked my id
   static String variableProductsURL = "variations";
   static String orderURL = "orders";
 }

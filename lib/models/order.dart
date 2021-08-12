@@ -2,7 +2,7 @@ import 'customer_detail_mode.dart';
 
 class OrderModel {
   //customer id was int, changed to string
-  String customerId;
+  int customerId;
   String paymentMethod;
   String paymentMethodTitle;
   bool setPaid;
@@ -54,4 +54,20 @@ class OrderModel {
   }
 }
 
-class LineItems {}
+class LineItems {
+  int productId;
+  int quantity;
+  int variationId;
+
+  LineItems({this.productId, this.quantity, this.variationId});
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['product_id'] = this.productId;
+    data['quantity'] = this.quantity;
+    if (this.variationId != null) {
+      data['variation_id'] = this.variationId;
+    }
+    return data;
+  }
+}

@@ -3,11 +3,14 @@ import 'package:we_deliver_bd/api_service.dart';
 import 'package:we_deliver_bd/models/cart_request_model.dart';
 import 'package:we_deliver_bd/models/cart_response_model.dart';
 import 'package:we_deliver_bd/models/customer_detail_mode.dart';
+import 'package:we_deliver_bd/models/order.dart';
 
 class CartProvider with ChangeNotifier {
   APIService _apiService;
   List<CartItem> _cartItems;
   CustomerDetailsModel _customerDetailsModel;
+  OrderModel _orderModel;
+  bool _isOrderCreated = false;
 
   List<CartItem> get cartItems => _cartItems;
   double get totalRecords => _cartItems.length.toDouble();
@@ -18,6 +21,8 @@ class CartProvider with ChangeNotifier {
       : 0;
 
   CustomerDetailsModel get customerDetailsModel => _customerDetailsModel;
+  OrderModel get orderModel => _orderModel;
+  bool get isOrderCreated => _isOrderCreated;
 
   CartProvider() {
     _apiService = APIService();
@@ -140,5 +145,46 @@ class CartProvider with ChangeNotifier {
     }
     _customerDetailsModel = await _apiService.customerDetails();
     notifyListeners();
+  }
+
+  processOrder(OrderModel orderModel) {
+    this._orderModel = orderModel;
+    notifyListeners();
+  }
+
+  void createOrder() async {
+    if (_orderModel.shipping == null) {
+      _orderModel.shipping = Shipping();
+    }
+
+    if (this.customerDetailsModel.shipping != null) {
+      _orderModel.shipping = this.customerDetailsModel.shipping;
+    }
+    //check list type
+    if (orderModel.lineitems == null) {
+      _orderModel.lineitems = <LineItems>[];
+    }
+
+    _cartItems.forEach(
+      (v) {
+        _orderModel.lineitems.add(
+          LineItems(
+            productId: v.productId,
+            quantity: v.qty,
+            variationId: v.variationId,
+          ),
+        );
+      },
+    );
+
+    await _apiService.createOrder(orderModel).then(
+          (value) => {
+            if (value)
+              {
+                _isOrderCreated = true,
+                notifyListeners(),
+              },
+          },
+        );
   }
 }

@@ -70,6 +70,7 @@ class FormHelper {
       child: Text(
         labelName,
         style: new TextStyle(
+          color: Colors.grey,
           fontWeight: FontWeight.bold,
           fontSize: 15.0,
         ),

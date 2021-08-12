@@ -181,7 +181,8 @@ class APIService {
   }
 
   Future<CartResponseModel> addtoCart(CartRequestModel model) async {
-    model.userId = int.parse(Config.userId);
+    //turned string to int in config
+    model.userId = Config.userId;
 
     CartResponseModel responseModel;
 
@@ -328,5 +329,36 @@ class APIService {
     }
 
     return isOrderCreated;
+  }
+
+  Future<List<OrderModel>> getOrders() async {
+    List<OrderModel> data = [];
+
+    try {
+      String url = Config.url +
+          Config.orderURL +
+          "?consumer_key=${Config.key}&consumer_secret=${Config.secret}";
+      print(url);
+
+      var response = await Dio().get(
+        url,
+        options: new Options(
+          headers: {
+            HttpHeaders.contentTypeHeader: "application/json",
+          },
+        ),
+      );
+      if (response.statusCode == 200) {
+        data = (response.data as List)
+            .map(
+              (e) => OrderModel.fromJson(e),
+            )
+            .toList();
+      }
+    } on DioError catch (e) {
+      print(e.response);
+    }
+
+    return data;
   }
 } //ends here. methods above
