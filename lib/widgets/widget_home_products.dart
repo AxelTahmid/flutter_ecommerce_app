@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:we_deliver_bd/api_service.dart';
 import 'package:we_deliver_bd/models/product.dart';
-import 'package:we_deliver_bd/pages/product_details.dart';
-import 'package:we_deliver_bd/pages/product_page.dart';
 import 'package:we_deliver_bd/widgets/widget_product_card.dart';
 
 import '../color_constants.dart';

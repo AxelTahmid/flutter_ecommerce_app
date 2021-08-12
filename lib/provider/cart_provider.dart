@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:we_deliver_bd/api_service.dart';
 import 'package:we_deliver_bd/models/cart_request_model.dart';
 import 'package:we_deliver_bd/models/cart_response_model.dart';
+import 'package:we_deliver_bd/models/customer_detail_mode.dart';
 
 class CartProvider with ChangeNotifier {
   APIService _apiService;
   List<CartItem> _cartItems;
+  CustomerDetailsModel _customerDetailsModel;
 
   List<CartItem> get cartItems => _cartItems;
   double get totalRecords => _cartItems.length.toDouble();
@@ -14,6 +16,8 @@ class CartProvider with ChangeNotifier {
           .map((e) => e.lineSubtotal)
           .reduce((value, element) => value + element)
       : 0;
+
+  CustomerDetailsModel get customerDetailsModel => _customerDetailsModel;
 
   CartProvider() {
     _apiService = APIService();
@@ -127,6 +131,14 @@ class CartProvider with ChangeNotifier {
     if (isProductExist != null) {
       _cartItems.remove(isProductExist);
     }
+    notifyListeners();
+  }
+
+  fetchShippingDetails() async {
+    if (_customerDetailsModel == null) {
+      _customerDetailsModel = CustomerDetailsModel();
+    }
+    _customerDetailsModel = await _apiService.customerDetails();
     notifyListeners();
   }
 }

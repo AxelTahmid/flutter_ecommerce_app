@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:we_deliver_bd/models/payment_method.dart';
-import 'package:we_deliver_bd/pages/base_page.dart';
+import 'package:we_deliver_bd/pages/checkout_base.dart';
 import 'package:we_deliver_bd/widgets/widget_payment_method_list_item.dart';
 
-class PaymentScreen extends BasePage {
-  PaymentScreen({Key key}) : super(key: key);
+class PaymentScreen extends CheckoutBasePage {
+  // PaymentScreen({Key key}) : super(key: key);
 
   @override
   _PaymentScreenState createState() => _PaymentScreenState();
 }
 
-class _PaymentScreenState extends BasePageState<PaymentScreen> {
+class _PaymentScreenState extends CheckoutBasePageState<PaymentScreen> {
   PaymentMethodList list;
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
+    this.currentPage = 1;
+  }
+
+  @override
+  Widget pageUI() {
     list = new PaymentMethodList();
 
     return SingleChildScrollView(

@@ -15,6 +15,7 @@ class Config {
   static String cartURL = "cart";
   static String userId = "20"; //for testing, picked my id
   static String variableProductsURL = "variations";
+  static String orderURL = "orders";
 }
 
 //max 10 items shown in category lists, top saver, top trending

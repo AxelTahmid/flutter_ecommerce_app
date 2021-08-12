@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:we_deliver_bd/provider/loader_provider.dart';
@@ -52,7 +50,7 @@ class CheckoutBasePageState<T extends CheckoutBasePage>
       centerTitle: true,
       brightness: Brightness.dark,
       elevation: 0,
-      backgroundColor: Colors.redAccent,
+      backgroundColor: Colors.green,
       automaticallyImplyLeading: showBackbutton,
       title: Text(
         "Checkout",
@@ -67,7 +65,7 @@ class CheckoutBasePageState<T extends CheckoutBasePage>
   }
 
   @override
-  Void dispose() {
+  void dispose() {
     super.dispose();
   }
 }

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:we_deliver_bd/models/payment_method.dart';
 import 'package:we_deliver_bd/pages/cart_page.dart';
 import 'package:we_deliver_bd/pages/dashboard_page.dart';
 import 'package:we_deliver_bd/pages/payment_screen.dart';
+import 'package:we_deliver_bd/pages/verify_address.dart';
 import 'package:we_deliver_bd/utils/cart_icons.dart';
-import 'package:we_deliver_bd/widgets/widget_payment_method_list_item.dart';
 
 import '../color_constants.dart';
 
@@ -19,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   List<Widget> _widgetList = [
     DashboardPage(),
     CartPage(),
-    DashboardPage(),
+    VerifyAddress(),
     PaymentScreen(),
     // PaymentMethodListItem(
     //   paymentMethod: new PaymentMethod(
