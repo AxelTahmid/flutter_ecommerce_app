@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:we_deliver_bd/pages/verify_address.dart';
 import 'package:we_deliver_bd/provider/cart_provider.dart';
 import 'package:we_deliver_bd/provider/loader_provider.dart';
 import 'package:we_deliver_bd/utils/ProgressHUD.dart';
@@ -150,7 +151,14 @@ Widget _cartItemsList() {
                           ),
                         ],
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => VerifyAddress(),
+                          ),
+                        );
+                      },
                       style: TextButton.styleFrom(
                         padding: EdgeInsets.all(15),
                         backgroundColor: ColorConstants.kPrimaryLightColor,

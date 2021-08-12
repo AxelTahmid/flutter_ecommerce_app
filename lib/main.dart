@@ -9,8 +9,6 @@ import 'package:we_deliver_bd/provider/cart_provider.dart';
 import 'package:we_deliver_bd/provider/loader_provider.dart';
 import 'package:we_deliver_bd/provider/products_provider.dart';
 
-import 'color_constants.dart';
-
 void main() {
   runApp(MyApp());
 }
@@ -40,29 +38,52 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'WooCommerce App',
         debugShowCheckedModeBanner: false,
+        home: HomePage(),
         theme: ThemeData(
-          fontFamily: 'Poppins',
+          fontFamily: 'ProductSans',
           primaryColor: Colors.white,
           floatingActionButtonTheme: FloatingActionButtonThemeData(
             elevation: 0,
             foregroundColor: Colors.white,
           ),
-          accentColor: ColorConstants.kPrimaryLightColor,
+          brightness: Brightness.light,
+          accentColor: Colors.redAccent,
+          dividerColor: Colors.redAccent,
+          focusColor: Colors.redAccent,
+          hintColor: Colors.redAccent,
           textTheme: TextTheme(
-              headline1: TextStyle(
-                  fontSize: 22.0, color: ColorConstants.kPrimaryLightColor),
-              headline2: TextStyle(
-                fontSize: 24.0,
-                fontWeight: FontWeight.w700,
-                color: ColorConstants.kPrimaryLightColor,
-              ),
-              bodyText1: TextStyle(
-                fontSize: 14.0,
-                fontWeight: FontWeight.w400,
-                color: Colors.blueAccent,
-              )),
+            headline2: TextStyle(
+              fontSize: 24.0,
+              fontWeight: FontWeight.w700,
+              color: Colors.redAccent,
+              height: 1.4,
+            ),
+            headline3: TextStyle(
+              fontSize: 22.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+              height: 1.3,
+            ),
+            headline4: TextStyle(
+              fontSize: 20.0,
+              fontWeight: FontWeight.w700,
+              color: Colors.redAccent,
+              height: 1.3,
+            ),
+            subtitle1: TextStyle(
+              fontSize: 18.0,
+              fontWeight: FontWeight.w500,
+              color: Colors.black,
+              height: 1.3,
+            ),
+            caption: TextStyle(
+              fontSize: 14.0,
+              fontWeight: FontWeight.w300,
+              color: Colors.grey,
+              height: 1.2,
+            ),
+          ),
         ),
-        home: HomePage(),
       ),
     );
   }

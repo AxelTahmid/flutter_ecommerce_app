@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:we_deliver_bd/models/payment_method.dart';
 import 'package:we_deliver_bd/pages/cart_page.dart';
 import 'package:we_deliver_bd/pages/dashboard_page.dart';
+import 'package:we_deliver_bd/pages/payment_screen.dart';
 import 'package:we_deliver_bd/utils/cart_icons.dart';
+import 'package:we_deliver_bd/widgets/widget_payment_method_list_item.dart';
 
 import '../color_constants.dart';
 
@@ -17,7 +20,18 @@ class _HomePageState extends State<HomePage> {
     DashboardPage(),
     CartPage(),
     DashboardPage(),
-    DashboardPage()
+    PaymentScreen(),
+    // PaymentMethodListItem(
+    //   paymentMethod: new PaymentMethod(
+    //     "cod",
+    //     "Cash On Delivery",
+    //     "Click to pay Cash On Delivery",
+    //     "assets/img/cash.png",
+    //     "/OrderSuccess",
+    //     () {},
+    //     false,
+    //   ),
+    // )
   ];
 
   int _index = 0;

@@ -31,7 +31,7 @@ class CartProvider with ChangeNotifier {
   ) async {
     CartRequestModel requestModel = CartRequestModel();
     // requestModel.products = List<CartProducts>() ;
-    requestModel.products = [];
+    requestModel.products = <CartProducts>[];
 
     if (_cartItems == null) {
       await fetchCartItems();
@@ -96,7 +96,7 @@ class CartProvider with ChangeNotifier {
   void updateCart(Function onCallback) async {
     CartRequestModel requestModel = CartRequestModel();
     // requestModel.products = List<CartProducts>() ;
-    requestModel.products = [];
+    requestModel.products = <CartProducts>[];
 
     if (_cartItems == null) resetStreams();
 
