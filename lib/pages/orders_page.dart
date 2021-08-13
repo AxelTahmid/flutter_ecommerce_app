@@ -26,9 +26,9 @@ class _OrderPageState extends State<OrderPage> {
     return Consumer<OrderProvider>(
       builder: (context, ordersModel, child) {
         if (ordersModel.allOrders != null && ordersModel.allOrders.length > 0) {
-          _listView(context, ordersModel.allOrders);
+          return _listView(context, ordersModel.allOrders);
         }
-
+        // return _listView(context, ordersModel.allOrders);
         return Center(
           child: CircularProgressIndicator(),
         );

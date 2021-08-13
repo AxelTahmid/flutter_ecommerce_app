@@ -34,11 +34,11 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => CartProvider(),
-          child: OrderPage(),
+          child: CartPage(),
         ),
         ChangeNotifierProvider(
           create: (context) => OrderProvider(),
-          child: CartPage(),
+          child: OrderPage(),
         ),
       ],
       child: MaterialApp(

@@ -21,7 +21,7 @@ class OrderProvider with ChangeNotifier {
     List<OrderModel> orderList = await _apiService.getOrders();
 
     if (_orderList == null) {
-      _orderList = <OrderModel>[];
+      _orderList = [];
     }
     if (orderList.length > 0) {
       _orderList = [];

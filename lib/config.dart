@@ -16,6 +16,7 @@ class Config {
   static int userId = 20; //for testing, picked my id
   static String variableProductsURL = "variations";
   static String orderURL = "orders";
+  static String currency = "৳";
 }
 
 //max 10 items shown in category lists, top saver, top trending
