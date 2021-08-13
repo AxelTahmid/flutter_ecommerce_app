@@ -10,8 +10,10 @@ import 'package:we_deliver_bd/models/customer.dart';
 import 'package:we_deliver_bd/models/customer_detail_mode.dart';
 import 'package:we_deliver_bd/models/login_model.dart';
 import 'package:we_deliver_bd/models/order.dart';
+import 'package:we_deliver_bd/models/order_detail.dart';
 import 'package:we_deliver_bd/models/product.dart';
 import 'package:we_deliver_bd/models/variable_product.dart';
+import 'package:we_deliver_bd/shared_service.dart';
 
 class APIService {
   Future<bool> createCustomer(CustomerModel model) async {
@@ -181,8 +183,10 @@ class APIService {
   }
 
   Future<CartResponseModel> addtoCart(CartRequestModel model) async {
-    //turned string to int in config
-    model.userId = Config.userId;
+    LoginResponseModel loginResponseModel = await SharedService.loginDetails();
+    if (loginResponseModel.data.id != null) {
+      model.userId = loginResponseModel.data.id;
+    }
 
     CartResponseModel responseModel;
 
@@ -215,22 +219,29 @@ class APIService {
     CartResponseModel responseModel;
 
     try {
-      String url = Config.url +
-          Config.cartURL +
-          "?user_id=${Config.userId}&consumer_key=${Config.key}&consumer_secret=${Config.secret}";
-      // print(url);
+      LoginResponseModel loginResponseModel =
+          await SharedService.loginDetails();
 
-      var response = await Dio().get(
-        url,
-        options: Options(
-          headers: {
-            HttpHeaders.contentTypeHeader: "application/json",
-          },
-        ),
-      );
+      if (loginResponseModel.data != null) {
+        int userId = loginResponseModel.data.id;
 
-      if (response.statusCode == 200) {
-        responseModel = CartResponseModel.fromJson(response.data);
+        String url = Config.url +
+            Config.cartURL +
+            "?user_id=$userId&consumer_key=${Config.key}&consumer_secret=${Config.secret}";
+        // print(url);
+
+        var response = await Dio().get(
+          url,
+          options: Options(
+            headers: {
+              HttpHeaders.contentTypeHeader: "application/json",
+            },
+          ),
+        );
+
+        if (response.statusCode == 200) {
+          responseModel = CartResponseModel.fromJson(response.data);
+        }
       }
     } on DioError catch (e) {
       print(e.response);
@@ -269,21 +280,28 @@ class APIService {
     CustomerDetailsModel responseModel;
 
     try {
-      String url = Config.url +
-          Config.customerURL +
-          "/${Config.userId}?consumer_key=${Config.key}&consumer_secret=${Config.secret}";
+      LoginResponseModel loginResponseModel =
+          await SharedService.loginDetails();
 
-      var response = await Dio().get(
-        url,
-        options: new Options(
-          headers: {
-            HttpHeaders.contentTypeHeader: "application/json",
-          },
-        ),
-      );
+      if (loginResponseModel.data != null) {
+        int userId = loginResponseModel.data.id;
 
-      if (response.statusCode == 200) {
-        responseModel = CustomerDetailsModel.fromJson(response.data);
+        String url = Config.url +
+            Config.customerURL +
+            "/$userId?consumer_key=${Config.key}&consumer_secret=${Config.secret}";
+
+        var response = await Dio().get(
+          url,
+          options: new Options(
+            headers: {
+              HttpHeaders.contentTypeHeader: "application/json",
+            },
+          ),
+        );
+
+        if (response.statusCode == 200) {
+          responseModel = CustomerDetailsModel.fromJson(response.data);
+        }
       }
     } on DioError catch (e) {
       if (e.response.statusCode == 404) {
@@ -355,5 +373,32 @@ class APIService {
       print(e.response);
     }
     return data;
+  }
+
+  Future<OrderDetailModel> getOrderDetails(int orderId) async {
+    OrderDetailModel responseModel = OrderDetailModel();
+
+    try {
+      String url = Config.url +
+          Config.orderURL +
+          "/$orderId?consumer_key=${Config.key}&consumer_secret=${Config.secret}";
+      print(url);
+
+      var response = await Dio().get(
+        url,
+        options: Options(
+          headers: {
+            HttpHeaders.contentTypeHeader: "application/json",
+          },
+        ),
+      );
+      if (response.statusCode == 200) {
+        responseModel = OrderDetailModel.fromJson(response.data);
+      }
+    } on DioError catch (e) {
+      print(e.response);
+    }
+
+    return responseModel;
   }
 } //ends here. methods above

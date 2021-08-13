@@ -4,6 +4,7 @@ import 'package:we_deliver_bd/models/cart_request_model.dart';
 import 'package:we_deliver_bd/models/cart_response_model.dart';
 import 'package:we_deliver_bd/models/customer_detail_mode.dart';
 import 'package:we_deliver_bd/models/order.dart';
+import 'package:we_deliver_bd/shared_service.dart';
 
 class CartProvider with ChangeNotifier {
   APIService _apiService;
@@ -81,14 +82,19 @@ class CartProvider with ChangeNotifier {
   }
 
   fetchCartItems() async {
+    bool isLoggedIn = await SharedService.isLoggedIn();
+
     if (_cartItems == null) resetStreams();
 
-    await _apiService.getCartItems().then((cartResponseModel) {
-      if (cartResponseModel.data != null) {
-        _cartItems.addAll(cartResponseModel.data);
-      }
-      notifyListeners();
-    });
+    if (isLoggedIn) {
+      await _apiService.getCartItems().then((cartResponseModel) {
+        if (cartResponseModel.data != null) {
+          _cartItems.clear();
+          _cartItems.addAll(cartResponseModel.data);
+        }
+        notifyListeners();
+      });
+    }
   }
 
   void updateQty(int productId, int qty, {int variationId = 0}) {

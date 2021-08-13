@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:we_deliver_bd/models/order.dart';
+import 'package:we_deliver_bd/models/order_detail.dart';
+import 'package:we_deliver_bd/pages/order_detail.dart';
 
 class WidgetOrderItem extends StatelessWidget {
   WidgetOrderItem({Key key, this.orderModel}) : super(key: key);
@@ -71,7 +73,15 @@ class WidgetOrderItem extends StatelessWidget {
                   ],
                 ),
                 Colors.green,
-                () {},
+                () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          OrderDetailsPage(orderID: this.orderModel.orderId),
+                    ),
+                  );
+                },
               ),
             ],
           ),

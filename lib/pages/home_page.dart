@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:we_deliver_bd/pages/cart_page.dart';
 import 'package:we_deliver_bd/pages/dashboard_page.dart';
-import 'package:we_deliver_bd/pages/order_detail.dart';
+import 'package:we_deliver_bd/pages/login_page.dart';
+import 'package:we_deliver_bd/pages/my_account.dart';
 import 'package:we_deliver_bd/pages/verify_address.dart';
 import 'package:we_deliver_bd/utils/cart_icons.dart';
 
 import '../color_constants.dart';
 
 class HomePage extends StatefulWidget {
-  // HomePage({Key? key}) : super(key: key);
-
+  HomePage({Key key, this.selectedPage}) : super(key: key);
+  int selectedPage;
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -18,11 +19,21 @@ class _HomePageState extends State<HomePage> {
   List<Widget> _widgetList = [
     DashboardPage(),
     CartPage(),
-    VerifyAddress(),
-    OrderDetailsPage(),
+    LoginPage(),
+    MyAccount(),
   ];
 
   int _index = 0;
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (this.widget.selectedPage != null) {
+      _index = this.widget.selectedPage;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

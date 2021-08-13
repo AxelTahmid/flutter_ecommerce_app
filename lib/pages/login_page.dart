@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:we_deliver_bd/api_service.dart';
 import 'package:we_deliver_bd/color_constants.dart';
+import 'package:we_deliver_bd/pages/home_page.dart';
+import 'package:we_deliver_bd/shared_service.dart';
 import 'package:we_deliver_bd/utils/ProgressHUD.dart';
 import 'package:we_deliver_bd/utils/form_helper.dart';
 
@@ -11,7 +13,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool hidePassword = true;
-  bool isApiCallProcess = true;
+  bool isApiCallProcess = false;
   GlobalKey<FormState> globalKey = GlobalKey<FormState>();
   String username;
   String password;
@@ -142,13 +144,26 @@ class _LoginPageState extends State<LoginPage> {
                               apiService
                                   .loginCustomer(username, password)
                                   .then((ret) {
-                                if (ret != null) {
+                                if (ret.success) {
+                                  //checking token in debug
+                                  print(ret.data.token);
+                                  print(ret.data.toJson());
+
+                                  SharedService.setLoginDetails(ret);
+
                                   FormHelper.showMessage(
                                     context,
                                     "WeDeliver App",
                                     "Login Sucessful!",
                                     "Ok",
-                                    () {},
+                                    () {
+                                      Navigator.pushAndRemoveUntil(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  HomePage(selectedPage: 3)),
+                                          ModalRoute.withName("/Home"));
+                                    },
                                   );
                                 } else {
                                   FormHelper.showMessage(
@@ -156,7 +171,9 @@ class _LoginPageState extends State<LoginPage> {
                                     "WeDeliver App",
                                     "Invalid Username or Password!",
                                     "Ok",
-                                    () {},
+                                    () {
+                                      Navigator.of(context).pop();
+                                    },
                                   );
                                 }
                               });
@@ -167,8 +184,6 @@ class _LoginPageState extends State<LoginPage> {
                             style: TextStyle(
                                 color: ColorConstants.kPrimaryTextColor),
                           ),
-                          // color: Theme.of(context).accentColor,
-                          // shape: StadiumBorder(),
                         ),
                         SizedBox(height: 15),
                       ],
