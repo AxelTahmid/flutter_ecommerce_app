@@ -39,41 +39,72 @@ class LoginResponseModel {
 
 class Data {
   String token;
-  int id;
   String email;
   String nicename;
-  String firstName;
-  String lastName;
   String displayName;
 
   Data({
     this.token,
     this.email,
     this.nicename,
-    this.firstName,
-    this.lastName,
     this.displayName,
   });
 
   Data.fromJson(Map<String, dynamic> json) {
     token = json['token'];
-    id = json['id'];
-    email = json['email'];
-    nicename = json['nicename'];
-    firstName = json['firstName'];
-    lastName = json['lastName'];
-    displayName = json['displayName'];
+    email = json['user_email'];
+    nicename = json['user_nicename'];
+    displayName = json['user_display_name'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['token'] = this.token;
-    data['email'] = this.email;
-    data['nicename'] = this.nicename;
-    data['firstName'] = this.firstName;
-    data['lastName'] = this.lastName;
-    data['displayName'] = this.displayName;
+    data['user_email'] = this.email;
+    data['user_nicename'] = this.nicename;
+    data['user_display_name'] = this.displayName;
 
     return data;
   }
 }
+
+// class Data {
+//   String token;
+//   int id;
+//   String email;
+//   String nicename;
+//   String firstName;
+//   String lastName;
+//   String displayName;
+
+//   Data({
+//     this.token,
+//     this.email,
+//     this.nicename,
+//     this.firstName,
+//     this.lastName,
+//     this.displayName,
+//   });
+  //jwt auth
+  // Data.fromJson(Map<String, dynamic> json) {
+  //   token = json['token'];
+  //   id = json['id'];
+  //   email = json['email'];
+  //   nicename = json['nicename'];
+  //   firstName = json['firstName'];
+  //   lastName = json['lastName'];
+  //   displayName = json['displayName'];
+  // }
+
+  // Map<String, dynamic> toJson() {
+  //   final Map<String, dynamic> data = new Map<String, dynamic>();
+  //   data['token'] = this.token;
+  //   data['email'] = this.email;
+  //   data['nicename'] = this.nicename;
+  //   data['firstName'] = this.firstName;
+  //   data['lastName'] = this.lastName;
+  //   data['displayName'] = this.displayName;
+
+  //   return data;
+  // }
+//}

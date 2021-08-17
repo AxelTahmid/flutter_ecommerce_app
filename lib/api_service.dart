@@ -278,7 +278,21 @@ class APIService {
 
   Future<CustomerDetailsModel> customerDetails() async {
     CustomerDetailsModel responseModel;
+    //have to add method to function php and call it in await to get user id
+//   function checkloggedinuser()
+// {
+// $currentuserid_fromjwt = get_current_user_id();
+// print_r($currentuserid_fromjwt);
+// exit;
+// }
 
+//  add_action('rest_api_init', function ()
+// {
+//   register_rest_route( 'testone', 'loggedinuser',array(
+//   'methods' => 'POST',
+//   'callback' => 'checkloggedinuser'
+//   ));
+// });
     try {
       LoginResponseModel loginResponseModel =
           await SharedService.loginDetails();

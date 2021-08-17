@@ -42,3 +42,15 @@ Content-Type: application/json
 
 GET https://wedeliver-bd.com/wp-json/wc/v3/orders?consumer_key=ck_e26a777da3190f037e36691ddd8994dcc8f0a2bd&consumer_secret=cs_6f6f47948c59f64665469345a2103235e14a300c HTTP/1.1
 Content-Type: application/json
+
+
+###authenticate
+POST https://wedeliver-bd.com//wp-json/jwt-auth/v1/token HTTP/1.1
+Content-Type: application/json
+
+{
+
+    "username" : "axel.tahmid@gmail.com",
+    "password" : "axel@12"
+}
+
